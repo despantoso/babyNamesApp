@@ -4,14 +4,22 @@ import './App.css';
 class App extends Component {
 
   render(){
-  
-    console.log('Our data is', this.props.data)
     
+    const {data} = this.props;
+
+    const nameList = data.map(name =>{
+      return (
+        <li key= {name.id} className={name.sex}>
+          {name.name}
+        </li>
+      )
+    })
+
     return (
     <div>
-      <li className="boy">
-        Name
-      </li>
+      <ul>
+        {nameList}
+      </ul>
     </div>
   );
 
