@@ -1,29 +1,43 @@
-import React, {Component} from 'react';
-import './App.css';
+import React, { Component } from "react";
+import NameList from "./components/NameList";
+import Credit from "./components/Credit";
+import Search from "./components/Search";
+import ShortList from "./components/ShortList";
 
 class App extends Component {
 
-  render(){
-    
-    const {data} = this.props;
+  constructor(props){
+    super(props)
+    this.state = {
+      filterText: 'hello'
+    }
+  }
 
-    const nameList = data.map(name =>{
-      return (
-        <li key= {name.id} className={name.sex}>
-          {name.name}
-        </li>
-      )
+  filterUpdate(value){
+    this.setState({
+      filterText: value
     })
+  }
+
+  render() {
 
     return (
-    <div>
-      <ul>
-        {nameList}
-      </ul>
-    </div>
-  );
-
-}
+      <div>
+        <Search 
+          filterText = {this.state.filterText} 
+          filterUpdate = {this.filterUpdate.bind(this)}
+        />
+        <main>
+          <ShortList />
+          <NameList 
+            data={this.props.data} 
+            filterText={this.state.filterText}
+          />
+          <Credit />
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;
